@@ -151,32 +151,55 @@ function showCurrentPage() {
     
     console.log('显示页面:', currentPageIndex);
     
-    // 创建左页（当前页）
-    const leftPage = document.createElement('div');
-    leftPage.className = 'page-left';
-    leftPage.innerHTML = allPages[currentPageIndex];
-    bookContainer.appendChild(leftPage);
-    
-    // 创建右页（下一页，如果存在）
-    if (currentPageIndex + 1 < allPages.length) {
-        const rightPage = document.createElement('div');
-        rightPage.className = 'page-flip-container right';
+    // iOS设备使用简化布局，完全避免3D变换
+    if (isIOS) {
+        // 创建左页（当前页）
+        const leftPage = document.createElement('div');
+        leftPage.className = 'page-left ios-page-left';
+        leftPage.innerHTML = allPages[currentPageIndex];
+        bookContainer.appendChild(leftPage);
         
-        const frontPage = document.createElement('div');
-        frontPage.className = 'page page-front';
-        frontPage.innerHTML = allPages[currentPageIndex + 1];
-        
-        rightPage.appendChild(frontPage);
-        
-        // 如果还有下下一页，添加背面
-        if (currentPageIndex + 2 < allPages.length) {
-            const backPage = document.createElement('div');
-            backPage.className = 'page page-back';
-            backPage.innerHTML = allPages[currentPageIndex + 2];
-            rightPage.appendChild(backPage);
+        // 创建右页（下一页，如果存在）- 不使用翻页容器
+        if (currentPageIndex + 1 < allPages.length) {
+            const rightPage = document.createElement('div');
+            rightPage.className = 'page-right ios-page-right';
+            rightPage.style.position = 'absolute';
+            rightPage.style.right = '0';
+            rightPage.style.width = '50%';
+            rightPage.style.height = '100%';
+            rightPage.innerHTML = allPages[currentPageIndex + 1];
+            
+            bookContainer.appendChild(rightPage);
         }
+    } else {
+        // 非iOS设备使用原来的3D翻页效果
+        // 创建左页（当前页）
+        const leftPage = document.createElement('div');
+        leftPage.className = 'page-left';
+        leftPage.innerHTML = allPages[currentPageIndex];
+        bookContainer.appendChild(leftPage);
         
-        bookContainer.appendChild(rightPage);
+        // 创建右页（下一页，如果存在）
+        if (currentPageIndex + 1 < allPages.length) {
+            const rightPage = document.createElement('div');
+            rightPage.className = 'page-flip-container right';
+            
+            const frontPage = document.createElement('div');
+            frontPage.className = 'page page-front';
+            frontPage.innerHTML = allPages[currentPageIndex + 1];
+            
+            rightPage.appendChild(frontPage);
+            
+            // 如果还有下下一页，添加背面
+            if (currentPageIndex + 2 < allPages.length) {
+                const backPage = document.createElement('div');
+                backPage.className = 'page page-back';
+                backPage.innerHTML = allPages[currentPageIndex + 2];
+                rightPage.appendChild(backPage);
+            }
+            
+            bookContainer.appendChild(rightPage);
+        }
     }
     
     // iOS滚动修复：为所有text-content元素启用滚动
@@ -291,18 +314,27 @@ function nextPage() {
     console.log('✅ 开始翻到下一页！');
     isAnimating = true;
     
-    const flipContainer = document.querySelector('.page-flip-container');
-    if (flipContainer) {
-        flipContainer.classList.add('flipping');
-        flipContainer.classList.add('flipped');
-        
-        setTimeout(() => {
-            currentPageIndex += 2;
-            isAnimating = false;
-            showCurrentPage();
-        }, 1000);
-    } else {
+    // iOS设备直接切换，不使用动画
+    if (isIOS) {
+        currentPageIndex += 2;
         isAnimating = false;
+        showCurrentPage();
+        console.log('📱 iOS: 直接切换到页面', currentPageIndex);
+    } else {
+        // 非iOS设备使用3D翻页动画
+        const flipContainer = document.querySelector('.page-flip-container');
+        if (flipContainer) {
+            flipContainer.classList.add('flipping');
+            flipContainer.classList.add('flipped');
+            
+            setTimeout(() => {
+                currentPageIndex += 2;
+                isAnimating = false;
+                showCurrentPage();
+            }, 1000);
+        } else {
+            isAnimating = false;
+        }
     }
 }
 
@@ -323,10 +355,11 @@ function prevPage() {
     
     currentPageIndex -= 2;
     
+    // iOS和非iOS都直接切换，上一页不需要动画
     setTimeout(() => {
         isAnimating = false;
         showCurrentPage();
-    }, 100);
+    }, isIOS ? 0 : 100);
 }
 
 // 返回主页

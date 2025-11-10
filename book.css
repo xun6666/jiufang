@@ -127,6 +127,25 @@ body {
     touch-action: pan-y;
 }
 
+/* iOS专用右页 - 无3D变换 */
+.page-right {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c3c 0%, #2d5a5a 100%);
+    border: 3px solid #4a7c7c;
+    border-radius: 0 10px 10px 0;
+    padding: 35px 30px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 60px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    pointer-events: auto !important;
+}
+
 .page-content {
     height: 100%;
     display: flex;
@@ -295,7 +314,7 @@ body {
         will-change: transform;
     }
     
-    .page, .page-left {
+    .page, .page-left, .page-right {
         padding: 30px 20px;
         overflow-x: visible !important;
         -webkit-overflow-scrolling: touch !important;
