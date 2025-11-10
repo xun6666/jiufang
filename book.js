@@ -4,6 +4,10 @@ let allPages = [];
 let isAnimating = false;
 let isInitialized = false; // 防止重复初始化
 
+// 检测是否为iOS设备
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+console.log('设备检测: iOS =', isIOS);
+
 // 音乐控制
 let isPlaying = false;
 const bgMusic = document.getElementById('bgMusic');
@@ -45,6 +49,12 @@ if (musicControl) {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
+    // 为iOS设备添加特殊类名
+    if (isIOS) {
+        document.body.classList.add('ios-device');
+        console.log('📱 iOS设备：已添加 ios-device 类');
+    }
+    
     const coverPage = document.getElementById('coverPage');
     const coverContent = document.querySelector('.cover-content');
     const bookContainer = document.getElementById('bookContainer');
@@ -169,7 +179,74 @@ function showCurrentPage() {
         bookContainer.appendChild(rightPage);
     }
     
+    // iOS滚动修复：为所有text-content元素启用滚动
+    setTimeout(() => {
+        enableScrollForAllPages();
+    }, 50);
+    
     updateButtons();
+}
+
+// 启用所有页面的滚动功能（特别针对iOS）
+function enableScrollForAllPages() {
+    // 如果是iOS设备，对容器做特殊处理
+    if (isIOS) {
+        const flipContainers = document.querySelectorAll('.page-flip-container');
+        flipContainers.forEach(container => {
+            container.style.transformStyle = 'flat';
+            container.style.webkitTransformStyle = 'flat';
+            container.style.webkitOverflowScrolling = 'touch';
+            container.style.touchAction = 'pan-y';
+        });
+        
+        const pages = document.querySelectorAll('.page, .page-left');
+        pages.forEach(page => {
+            page.style.webkitOverflowScrolling = 'touch';
+            page.style.touchAction = 'pan-y';
+            page.style.pointerEvents = 'auto';
+        });
+        
+        console.log('📱 iOS设备：已优化', flipContainers.length, '个翻页容器');
+    }
+    
+    const textContents = document.querySelectorAll('.text-content');
+    textContents.forEach(content => {
+        // 强制设置滚动相关样式
+        content.style.webkitOverflowScrolling = 'touch';
+        content.style.touchAction = 'pan-y';
+        content.style.overflowY = 'auto';
+        content.style.minHeight = '0';
+        content.style.position = 'relative';
+        
+        // 为iOS添加触摸事件监听，防止被父容器阻止
+        let startY = 0;
+        let isScrolling = false;
+        
+        content.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].pageY;
+            isScrolling = content.scrollHeight > content.clientHeight;
+        }, { passive: true });
+        
+        content.addEventListener('touchmove', function(e) {
+            if (!isScrolling) return;
+            
+            const currentY = e.touches[0].pageY;
+            const scrollTop = content.scrollTop;
+            const scrollHeight = content.scrollHeight;
+            const clientHeight = content.clientHeight;
+            
+            // 允许内部滚动
+            const isAtTop = scrollTop === 0 && currentY > startY;
+            const isAtBottom = scrollTop + clientHeight >= scrollHeight && currentY < startY;
+            
+            // 只在滚动到边界时才阻止默认行为
+            if (!isAtTop && !isAtBottom) {
+                e.stopPropagation();
+            }
+        }, { passive: true });
+    });
+    
+    console.log('✅ 已为', textContents.length, '个内容区域启用iOS滚动');
 }
 
 // 更新按钮状态

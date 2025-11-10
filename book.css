@@ -13,6 +13,7 @@ body {
     align-items: center;
     overflow-x: hidden;
     perspective: 2500px;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* 书本包装器 */
@@ -57,6 +58,8 @@ body {
     transform-origin: left center;
     transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: 1;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .page-flip-container.right {
@@ -85,16 +88,25 @@ body {
         inset 0 0 60px rgba(255, 255, 255, 0.05);
     overflow: hidden;
     backface-visibility: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    pointer-events: auto;
 }
 
 .page.page-front {
     transform: rotateY(0deg);
     border-radius: 0 10px 10px 0;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    pointer-events: auto;
 }
 
 .page.page-back {
     transform: rotateY(180deg);
     border-radius: 10px 0 0 10px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    pointer-events: auto;
 }
 
 /* 固定的左页 */
@@ -111,6 +123,8 @@ body {
         0 10px 40px rgba(0, 0, 0, 0.5),
         inset 0 0 60px rgba(255, 255, 255, 0.05);
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .page-content {
@@ -118,6 +132,9 @@ body {
     display: flex;
     flex-direction: column;
     color: #ffffff;
+    touch-action: pan-y;
+    overflow: hidden;
+    position: relative;
 }
 
 .page-title {
@@ -152,6 +169,11 @@ body {
     font-size: 14px;
     color: #e0f0f0;
     padding-right: 10px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    position: relative;
+    min-height: 0;
+    will-change: scroll-position;
 }
 
 /* 自定义滚动条样式 */
@@ -262,11 +284,32 @@ body {
         width: 95vw;
         height: 85vh;
         max-height: 600px;
+        transform-style: flat !important;
+    }
+    
+    .page-flip-container {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        pointer-events: auto !important;
+        transform-style: flat !important;
+        will-change: transform;
     }
     
     .page, .page-left {
         padding: 30px 20px;
         overflow-x: visible !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        pointer-events: auto !important;
+    }
+    
+    .page.page-front,
+    .page.page-back {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        pointer-events: auto !important;
+        backface-visibility: hidden !important;
+        isolation: isolate;
     }
     
     .page-title {
@@ -278,10 +321,22 @@ body {
         font-size: 13px;
     }
     
+    .page-content {
+        overflow: hidden !important;
+        touch-action: pan-y !important;
+        position: relative !important;
+    }
+    
     .text-content {
         font-size: 12px;
         line-height: 1.5;
         overflow-x: visible !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        position: relative !important;
+        min-height: 0 !important;
+        will-change: scroll-position !important;
     }
     
     .text-content p {
@@ -456,8 +511,71 @@ body {
     padding: 30px;
 }
 
+/* iOS设备专属优化 */
+.ios-device .book-container {
+    transform-style: flat !important;
+    -webkit-transform-style: flat !important;
+}
+
+.ios-device .page-flip-container {
+    transform-style: flat !important;
+    -webkit-transform-style: flat !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+}
+
+.ios-device .page,
+.ios-device .page-left,
+.ios-device .page-front,
+.ios-device .page-back {
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    pointer-events: auto !important;
+}
+
+.ios-device .page-content {
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+}
+
+.ios-device .text-content {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    min-height: 0 !important;
+    position: relative !important;
+    will-change: scroll-position !important;
+}
+
 /* 小屏手机优化（宽度小于480px） */
 @media (max-width: 480px) {
+    .page-flip-container {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        pointer-events: auto !important;
+        transform-style: flat !important;
+    }
+    
+    .page.page-front,
+    .page.page-back {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        pointer-events: auto !important;
+    }
+    
+    .page-content {
+        overflow: hidden !important;
+        touch-action: pan-y !important;
+    }
+    
+    .text-content {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+    }
+    
     #navContainer {
         padding: 8px 0 !important;
     }
