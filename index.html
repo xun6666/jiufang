@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九方房屋管家</title>
+    <link rel="stylesheet" href="book.css">
+</head>
+<body>
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="music/bg-music.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+    
+    <!-- 音乐控制按钮 -->
+    <div id="musicControl" style="position: fixed; top: 20px; right: 20px; z-index: 999999; background: rgba(44, 122, 123, 0.9); padding: 15px 20px; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+        <span id="musicIcon" style="font-size: 24px;">🎵</span>
+        <span id="musicStatus" style="color: white; font-size: 14px; font-weight: bold;">点击播放音乐</span>
+    </div>
+    <!-- 封面页 -->
+    <div class="cover-page" id="coverPage">
+        <div class="cover-content">
+            <div class="cover-logo">
+                <img src="images/f79dfe6b8529d8bcd009715b1c8ec8a.jpg" style="width: 150px; margin-bottom: 20px;">
+                <h1 style="font-size: 48px; color: #2c7a7b; margin: 20px 0;">九方物业</h1>
+                <p style="font-size: 24px; color: #f59e0b; font-weight: bold;">房屋托管 · 房屋租赁</p>
+            </div>
+            <div class="cover-buildings">
+                <svg viewBox="0 0 800 300" style="width: 100%; height: 300px;">
+                    <rect x="50" y="120" width="80" height="180" fill="#2c7a7b" opacity="0.8"/>
+                    <rect x="150" y="80" width="100" height="220" fill="#2c7a7b" opacity="0.9"/>
+                    <rect x="270" y="100" width="90" height="200" fill="#2c7a7b" opacity="0.7"/>
+                    <rect x="380" y="60" width="110" height="240" fill="#2c7a7b" opacity="0.85"/>
+                    <rect x="510" y="90" width="95" height="210" fill="#2c7a7b" opacity="0.75"/>
+                    <rect x="625" y="70" width="115" height="230" fill="#2c7a7b" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="cover-company">
+                <h2 style="font-size: 32px; color: white; margin: 30px 0;">九方信息科技有限公司</h2>
+            </div>
+            <button class="open-book-btn" id="openBookBtn">
+                点击查看全册
+            </button>
+        </div>
+    </div>
+
+    <div class="book-container" id="bookContainer" style="display: none;">
+        <!-- 第1页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-subtitle" style="margin-top: 10px; margin-bottom: 10px; font-size: 13px; text-align: center;">SINCERELY INVITE YOU TO JOIN US</div>
+                <img src="images/5e85d60957f3db7ecc7cf31b4d95c888.png" style="width: 80%; border-radius: 8px; margin: 8px auto; display: block;">
+                <div class="text-content" style="text-align: center;">
+                    <h2 style="font-size: 36px; font-weight: bold; margin: 15px 0 12px 0; letter-spacing: 8px;">九方物业</h2>
+                    <p style="font-size: 16px; margin: 10px 0; letter-spacing: 2px;">房屋托管  房屋租赁</p>
+                    <p style="font-size: 14px; margin-top: 8px;">九方信息科技有限公司</p>
+                    <p style="font-size: 11px; margin-top: 12px; opacity: 0.75; letter-spacing: 1px;">PURSUE INNOVATION WIN THE FUTURE</p>
+                </div>
+                <div class="page-number">1/9</div>
+            </div>
+        </div>
+
+        <!-- 第2页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 公司简介 —</div>
+                <div class="page-subtitle">COMPANY PROFILE</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <p>东莞市九方信息科技有限公司（九方房屋管家）</p>
+                    <p>成立于2015年11月，公司总部坐落于长安镇富山居恒泰路8号。九方房屋管家用贴心、高效、诚信、专业化的服务管理模式，专注于解决业主房屋出租难、带租客看房烦等问题，让业主更加省心、省时、省事，是一家致力于房屋托管和房屋租赁领域的房产服务企业。</p>
+                    <p>九方房屋管家为客户提供，及后期维护管理的一站式管家服务，为租客24小时提供贴心5福，让租客在外面也能感受到"家"的温暖。自公司成立以来，九方房屋管家已累计在东莞管理房源5000+套，服务业主3000+名，房屋出租率高达97.69%以上，业主好评率高达98.36%。</p>
+                    <p>多年以来，公司始终坚持"服务为本、赢于至善"的服务理念，全心全意的把服务做到最好，不断精进创新于成长、大业，我们前途不可限量！</p>
+                </div>
+                <div class="page-number">2/9</div>
+            </div>
+        </div>
+
+        <!-- 第3页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">—房屋托管介绍—</div>
+                <div class="page-subtitle">CORE VALUES</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <div style="display: flex; justify-content: space-around; margin: 15px 0 20px 0;">
+                        <img src="images/02471b70e3e57dfb689421584a124048.png" style="width: 40%; border-radius: 8px;">
+                        <img src="images/fb9be94eafe726240dc7269e708be688.png" style="width: 40%; border-radius: 8px;">
+                    </div>
+                    <p><strong>房屋托管主要针对于全重房产出租难等问题，业主把全重的房产交给房屋托管公司，一切事物都由房屋托管公司来做，能让业主更加省心、省力、省时。</strong></p>
+                    <p style="margin-top: 20px;"><strong>房屋托管针对人群</strong></p>
+                    <p><strong>1、</strong>平时工作繁忙的人士。</p>
+                    <p><strong>2、</strong>长期在外的离岸人士。</p>
+                    <p><strong>3、</strong>不想受租房琐碎烦扰，重在生活质量的人士。</p>
+                    <p><strong>4、</strong>不懂长打理出租房的人士。</p>
+                </div>
+                <div class="page-number">3/9</div>
+            </div>
+        </div>
+
+        <!-- 第4页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 九方房屋管家 —</div>
+                <div class="page-subtitle">COMPANY PROFILE</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <p><strong>一、存房托管</strong></p>
+                    <p>将客户的物业存入九方，仅需30天的招租期，其余时间无论出租与否，每月均能按时收到租金，所有的房屋管理工作交给九方房屋管家。</p>
+                    <p style="margin-top: 20px;"><strong>二、毛坯托管</strong></p>
+                    <p>将未装修的毛坯房，以合同的形式托管给九方，由九方出资代为装修，出租管理，业主按合同约定每月收取租金，避免客户损失及支付物业管理费等。</p>
+                    <p style="margin-top: 20px;"><strong>三、居间服务</strong></p>
+                    <p>将待出租的物业委托九方寻找租客，提供《出租物业委托书》和钥匙，成功出租后，一次性收取一个月租金作为介绍费。</p>
+                    <p style="margin-top: 20px;"><strong>四、管家服务</strong></p>
+                    <p>将物业以合同形式委托九方招租与管理，入住率低于50%期间业主无需缴纳任何服务费用，入住率高于50%后，九方仅收取1000元作为托管费用。</p>
+                </div>
+                <div class="page-number">4/9</div>
+            </div>
+        </div>
+
+        <!-- 第5页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 服务流程 —</div>
+                <div class="page-subtitle">CORPORATE CULTURE</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <p><strong>一、意向沟通</strong></p>
+                    <img src="images/意向沟通.png" style="width: 60%; border-radius: 8px; margin: 8px auto; display: block;">
+                    <p style="margin-top: 10px;"><strong>二、上门看房预估报价</strong></p>
+                    <img src="images/意向沟通(1).png" style="width: 60%; border-radius: 8px; margin: 8px auto; display: block;">
+                    <p style="margin-top: 10px;"><strong>三、确认细节</strong></p>
+                    <img src="images/403b0d22cdf4faaa8cf49add02a5c50.png" style="width: 60%; border-radius: 8px; margin: 8px auto; display: block;">
+                    <p style="margin-bottom: 8px;"><strong>四、签约合作</strong></p>
+                    <img src="images/958bfc6f847b7f465d4ce621dc78328.png" style="width: 60%; border-radius: 8px; margin: 8px auto; display: block;">
+                    <p style="margin-bottom: 8px;"><strong>五、坐等租金</strong></p>
+                    <img src="images/814d49e9de8f1a789defe0445de0396.jpg" style="width: 60%; border-radius: 8px; margin: 8px auto; display: block;">
+                </div>
+                <div class="page-number">5/9</div>
+            </div>
+        </div>
+
+        <!-- 第6页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 九方房屋管家 —</div>
+                <div class="page-subtitle">客户如是说</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <p><strong>1、在于工作的陈小姐</strong></p>
+                    <p>陈小姐最近这几天一直在为房屋出租的事烦恼，一是每天都要带看客房，来来回回浪费时间，浪费精力，二是每天会收到好几个不实消息，产生了大量的无效沟通，耽误人生活，了解了房屋托管后，就把房子交给了九方托管，到现在我几个月了没收到骚扰电话说了，先交给他们一年看看情况。</p>
+                    <p><strong>2、在海外居住的张先生</strong></p>
+                    <p>回想起另一位出租的事情，业主张先生生意繁忙的说："九方房屋管家真的好，简直就是我们业主的好帮手，我有一套房子给他们托管三年了，不仅没有改变我房子的内部格局，我的墙面和家具也保养的非常好，和新的一样，一些房子的琐事都是九方的人出面解决，我每个月按时会收到打来的租金，有什么问题都他们办事解决很有效率，完全不用自己操心。"</p>
+                    <p><strong>3、重干劳动活的袁先生</strong></p>
+                    <p>业主袁先生有一套房子租了好长时间也没租掉，偶然的机会网上看到了九方的房屋托管，才了解了什么是房屋管家，就联系了九方的工作人员，没想到真很快队，于是就去他们公司详细咨询，给我分析了市场价格，也有很好合理，于是决定委托九方打理这套房子租赁，后过去来装饰房子了，又找保洁打扫了卫生，这让我对他们更加信赖了，就把房子交给他们了，相信九方房屋管家不会让我失望的。</p>
+                </div>
+                <div class="page-number">6/9</div>
+            </div>
+        </div>
+
+        <!-- 第7页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 企业优势 —</div>
+                <div class="page-subtitle">CORPORATE ENVIRONMENT</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <p><strong>一、寻找租客保障收益</strong></p>
+                    <p>租房群体复杂，很难辨别租客素质及是否爱惜房屋设备，九方寻找租客、房屋清洁、按时支付租金，提供全程管理。</p>
+                    <p style="margin-top: 20px;"><strong>二、代为出面解决纠纷</strong></p>
+                    <p>房屋出租难免会出现矛盾和纠纷，提供法务支持，九方作为第三方出面协调，专业、公正、公平。</p>
+                    <p style="margin-top: 20px;"><strong>三、陪同客户来回看房</strong></p>
+                    <p>据调查显示：每套物业出租需要看房10-15天，无数次的陪客看房，讨价还价的谈判，费心费时。</p>
+                    <p style="margin-top: 20px;"><strong>四、处理维修杂项结算</strong></p>
+                    <p>家电老化，鼠线、宽带、维修德报修、水电、燃气等杂费。结算繁琐，耗时耗力，九方专业、规范的物业管理服务，保障业主利益。</p>
+                    <p style="margin-top: 20px;"><strong>五、催收房租空置风险</strong></p>
+                    <p>催收租金是房屋出租的最大烦恼，租约不慎就会出现退租，带来二次空置的风险，九方代为催收房租，业主不用担心租金以各种理由推迟交租，方便又省心。</p>
+                </div>
+                <div class="page-number">7/9</div>
+            </div>
+        </div>
+
+        <!-- 第8页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title">— 售后服务 —</div>
+                <div class="page-subtitle">AFTER-SALESSERVICE</div>
+                <div class="divider"></div>
+                <div class="text-content">
+                    <img src="images/924ea9d62b43b57e3860ada35a98dcf7.png" style="width: 60%; border-radius: 8px; margin: 10px auto 15px auto; display: block;">
+                    <p style="margin-top: 12px;"><strong>1、</strong>30分钟内响应预约上门服务，全年365天24小时随时听候您的召唤。</p>
+                    <p style="margin-top: 10px;"><strong>2、</strong>市区8小时服务到位，市郊12小时内服务到位，远郊24小时服务到位。</p>
+                    <p style="margin-top: 10px;"><strong>3、</strong>合同到期后房屋物品、家私家电、水电燃气等服务免费交接。</p>
+                </div>
+                <div class="page-number">8/9</div>
+            </div>
+        </div>
+
+        <!-- 第9页 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="page-title" style="margin-bottom: 8px;">— 联系我们 —</div>
+                <div class="page-subtitle" style="margin-bottom: 15px;">CONTACT US</div>
+                <div class="divider" style="margin-bottom: 15px;"></div>
+                <div class="text-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    
+                    <!-- 标题 -->
+                    <h2 style="font-size: 38px; font-weight: bold; margin: 0 0 15px 0; letter-spacing: 12px; color: #ffffff; text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5); text-align: center; width: 100%; padding-left: 42px;">九方物业</h2>
+                    
+                    <!-- 副标题 -->
+                    <p style="font-size: 17px; margin: 0 0 20px 0; letter-spacing: 3px; color: #b8d4d4; text-align: center; width: 100%;">房屋托管 · 房屋租赁</p>
+                    
+                    <!-- Logo -->
+                    <div class="last-page-logo" style="width: 350px; height: 350px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
+                        <img src="images/f79dfe6b8529d8bcd009715b1c8ec8a.jpg" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    
+                    <!-- 分隔线 -->
+                    <div style="width: 180px; height: 2px; background: linear-gradient(90deg, transparent, #4a7c7c, transparent); margin: 0 auto 30px auto;"></div>
+                    
+                    <!-- 公司信息 -->
+                    <p style="font-size: 16px; margin: 0 0 12px 0; opacity: 0.9; letter-spacing: 2px; text-align: center; width: 100%;">九方信息科技有限公司</p>
+                    <p style="font-size: 14px; margin: 0; opacity: 0.7; text-align: center; width: 100%;">期待为您服务 🤝</p>
+                </div>
+                <div class="page-number">9/9</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="book.js"></script>
+    
+    <!-- 导航按钮 - 放在body最后 -->
+    <div id="navContainer" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.1); padding: 20px 0; text-align: center; z-index: 999999; display: none; pointer-events: all;">
+        <button id="homeBtn" style="padding: 20px 50px; background: #2c7a7b; color: white; border: 3px solid white; font-size: 20px; cursor: pointer !important; border-radius: 30px; font-weight: bold; margin: 0 15px; pointer-events: all !important; position: relative; z-index: 1000000;">
+            🏠 返回主页
+        </button>
+        
+        <button id="prevBtn" style="padding: 20px 50px; background: #4a7c7c; color: white; border: 3px solid white; font-size: 20px; cursor: pointer !important; border-radius: 30px; font-weight: bold; margin: 0 15px; pointer-events: all !important; position: relative; z-index: 1000000;">
+            ◀ 上一页
+        </button>
+        
+        <button id="nextBtn" style="padding: 20px 50px; background: #4a7c7c; color: white; border: 3px solid white; font-size: 20px; cursor: pointer !important; border-radius: 30px; font-weight: bold; margin: 0 15px; pointer-events: all !important; position: relative; z-index: 1000000;">
+            下一页 ▶
+        </button>
+    </div>
+</body>
+</html>
