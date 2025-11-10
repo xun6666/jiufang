@@ -266,6 +266,7 @@ body {
     
     .page, .page-left {
         padding: 30px 20px;
+        overflow-x: visible !important;
     }
     
     .page-title {
@@ -280,6 +281,7 @@ body {
     .text-content {
         font-size: 12px;
         line-height: 1.5;
+        overflow-x: visible !important;
     }
     
     .text-content p {
@@ -289,6 +291,56 @@ body {
     .nav-btn {
         padding: 10px 20px;
         font-size: 14px;
+    }
+    
+    /* 导航容器移动端优化 */
+    #navContainer {
+        padding: 10px 0 !important;
+    }
+    
+    /* 导航按钮移动端优化 - 使用!important覆盖内联样式 */
+    #homeBtn, #prevBtn, #nextBtn {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        margin: 0 5px !important;
+        border-radius: 20px !important;
+    }
+    
+    /* 最后一页标题优化 */
+    .text-content h2 {
+        font-size: 28px !important;
+        letter-spacing: 6px !important;
+        padding-left: 21px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* 最后一页副标题优化 */
+    .text-content > p:first-of-type {
+        font-size: 14px !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    /* 最后一页Logo优化 */
+    .last-page-logo {
+        width: 180px !important;
+        height: 180px !important;
+        padding: 15px !important;
+        margin: 0 auto 15px auto !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* 确保Logo图片完整显示 */
+    .last-page-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
+    
+    /* 最后一页分隔线 */
+    .text-content > div[style*="width: 180px"] {
+        width: 120px !important;
+        margin-bottom: 20px !important;
     }
     
     .cover-content {
@@ -402,6 +454,45 @@ body {
     border-radius: 50%;
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
     padding: 30px;
+}
+
+/* 小屏手机优化（宽度小于480px） */
+@media (max-width: 480px) {
+    #navContainer {
+        padding: 8px 0 !important;
+    }
+    
+    #homeBtn, #prevBtn, #nextBtn {
+        padding: 8px 15px !important;
+        font-size: 12px !important;
+        margin: 0 3px !important;
+        border-radius: 18px !important;
+        border-width: 2px !important;
+    }
+    
+    /* 最后一页进一步优化 */
+    .text-content h2 {
+        font-size: 24px !important;
+        letter-spacing: 4px !important;
+        padding-left: 14px !important;
+    }
+    
+    .text-content > p:first-of-type {
+        font-size: 13px !important;
+        letter-spacing: 1px !important;
+    }
+    
+    .last-page-logo {
+        width: 140px !important;
+        height: 140px !important;
+        padding: 12px !important;
+    }
+    
+    .last-page-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
 }
 
 @media (max-width: 768px) {
